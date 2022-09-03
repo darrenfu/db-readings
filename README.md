@@ -1,6 +1,6 @@
 # Readings in Databases
 
-A list of papers essential to understanding latest database development and building new database systems. The list is curated and maintained by Darren Fu (@darrenfu). If you think a paper should be part of this list, please submit a pull request. It might take a while since I need to go over the paper.
+A list of papers essential to understanding latest database development and building new database systems. The list is curated and maintained by Darren Fu (@darrenfu). If you want to contribute a paper review to this list, please submit a pull request. 
 
 ## <a name='TOC'>Table of Contents</a>
 
