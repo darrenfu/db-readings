@@ -8,4 +8,6 @@ A list of papers essential to understanding latest database development and buil
 
 
 ## <a name='basic-and-algo'> VLDB Papers
-* [The Five-Minute Rule Ten Years Later, and Other Computer Storage Rules of Thumb](papers/5_min_rule_sigmod.pdf) (1997): This paper (and the original one proposed 10 years earlier) illustrates a quantitative formula to calculate whether a data page should be cached in memory or not. It is a delight to read Jim Gray approach to an array of related problems, e.g. how big should a page size be.
+* [Assembling a Query Engine From Spare Parts](https://www.firebolt.io/content/firebolt-vldb-cdms-2022) (2022): This paper introduces how Firebolt database is built from scratch within 18 months. It is built on top a few existing opensource projects: parser: .
+* [Velox: Meta’s Unified Execution Engine](https://research.facebook.com/file/477542930588455/Velox-Metas-Unified-Execution-Engine-p1030-pedreira-cr2-1.pdf) (2022): TBD
+* Reference: [VLDB Papers in 2022](https://vldb.org/2022/?papers-industrial)
