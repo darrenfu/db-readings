@@ -17,4 +17,4 @@ A list of papers essential to understanding latest database development and buil
     As a lesson learnt, they chose assembling on top of a solid foundation, building in a single language for high velocity, investing heavily to connect different systems, e.g. unifying the type systems across planner and runtime. 
 * [Velox: Meta’s Unified Execution Engine](https://research.facebook.com/file/477542930588455/Velox-Metas-Unified-Execution-Engine-p1030-pedreira-cr2-1.pdf): TBD
 * [Magma: AHighDataDensity Storage Engine Used in Couchbase](https://www.vldb.org/pvldb/vol15/p3496-lakshman.pdf): TBD
-* Reference: [VLDB Papers in 2022](https://vldb.org/2022/?papers-industrial](https://vldb.org/2022/?paper-session)
+* Reference: [VLDB Papers in 2022](https://vldb.org/2022/?paper-session)
