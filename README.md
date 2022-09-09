@@ -17,7 +17,7 @@ A list of papers essential to understanding latest database development and buil
   
     As a lesson learnt, they chose assembling on top of a solid foundation, building in a single language for high velocity, investing heavily to connect different systems, e.g. unifying the type systems across planner and runtime. 
 * [Velox: Meta’s Unified Execution Engine](https://research.facebook.com/file/477542930588455/Velox-Metas-Unified-Execution-Engine-p1030-pedreira-cr2-1.pdf): TBD
-* [Magma: AHighDataDensity Storage Engine Used in Couchbase](https://www.vldb.org/pvldb/vol15/p3496-lakshman.pdf): TBD
+* [Magma: A High Data Density Storage Engine Used in Couchbase](https://www.vldb.org/pvldb/vol15/p3496-lakshman.pdf): This paper primarily introduces a bunch of optimization techniques to the LSM tree based storage engine in Couchbase. The next generation storage engine, *Magma*, will replace the current one, *Couchstore*, which is based on Copy-On-Write B+Tree. Its design goals is to minimize write amplification, to scale concurrent compactions, to optimize for SSDs, and to lower the memory footprint. The gist of the optimizations is to separate the index data structure (stored in a component called *LSM Tree Index*) from the document data storage (a new component called *Log Structured Object Store* - it also allows range query by seqno). There is another new component, *Index Block Cache*, a read cache for caching the recently read (LRU) index blocks.
 * Reference: [VLDB Papers in 2022](https://vldb.org/2022/?paper-session)
 
 ## <a name='tech-talks'> Tech talks
