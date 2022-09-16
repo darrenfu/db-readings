@@ -29,4 +29,6 @@ A list of papers essential to understanding latest database development and buil
 
 ## <a name='tech-talks'> Tech talks
 * [Power of the Log:LSM & Append Only Data Structures](https://www.infoq.com/presentations/lsm-append-data-structures/) (2017)
-  
+
+## <a name='misc'> Misc papers
+* [Dr. Jana Giceva Makreshanska's publications](https://db.in.tum.de/~giceva/index.shtml?lang=en)
