@@ -5,7 +5,8 @@ A list of papers essential to understanding latest database development and buil
 ## <a name='TOC'>Table of Contents</a>
 
   1. [VLDB Papers](#vldb)
-  2. [Tech talks](#techtalks)
+  2. [Tech Talks](#techtalks)
+  3. [Miscellaneous Papers](#misc)
 
 
 ## <a name='vldb-papers'> VLDB Papers
@@ -30,5 +31,5 @@ A list of papers essential to understanding latest database development and buil
 ## <a name='tech-talks'> Tech talks
 * [Power of the Log:LSM & Append Only Data Structures](https://www.infoq.com/presentations/lsm-append-data-structures/) (2017)
 
-## <a name='misc'> Misc papers
+## <a name='misc'> Miscellaneous Papers
 * [Dr. Jana Giceva Makreshanska's publications](https://db.in.tum.de/~giceva/index.shtml?lang=en)
