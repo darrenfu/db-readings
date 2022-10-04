@@ -28,12 +28,12 @@ A list of papers essential to understanding latest database development and buil
   1. [Scaling with high IOPS] Using async I/O. 
 
 * [Fast Scans on Key-Value Stores](https://vldb.org/pvldb/vol10/p1526-bocksrocker.pdf): This paper enumerates the dominant factors impacting the performance of Key-Value Store (KVS) with point queries versus range queries. It depicts the SQL-over-NoSQL architecture and shows the possible compromises to support mixed OLAP/OLTP workloads on top of a KVS. The alternative approaches are based on three performance characteristics in terms of storage efficiency (fragmentation), concurrency (addition conflicts), cost to implement versioning and GC, and efficiency for scan and get/put operations. There are a total of 24 ways to build KVS using this taxonomy:
-  - (update-in-place vs. log-structured vs. delta-main)
-  - (row-major vs. column-major / PAX)
-  - (clustered-versions vs. chained-versions)
-  - (periodic vs. piggy-backed garbage collection)
+  * (update-in-place vs. log-structured vs. delta-main)  
+  * (row-major vs. column-major / PAX)  
+  * (clustered-versions vs. chained-versions)
+  * (periodic vs. piggy-backed garbage collection)
 
-The authors implemented two variants: 
+    The authors implemented two of the variants as below. TellStore makes careful compromises with regard to latency vs. throughput tradeoffs (e.g. batching) and time vs. space tradeoffs (lock-free hash table) to help remedy the effects of concurrent updates on scans.
   1. TellStore-Log: based on logstructured with chained-versions in a row-major format and 
   1. TellStore-Col: using a delta-main structure with clustered-versions in a column-major format.
 
