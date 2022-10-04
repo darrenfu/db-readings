@@ -26,7 +26,19 @@ A list of papers essential to understanding latest database development and buil
   1. [Gabarge collection] The key idea is to maintain a logically sorted *delete list LSM tree* of stale document seqnos and their size per log segment. 
   1. [Crash recovery] Maintaining a metadata file to store a point-in-time snapshot checkpoint
   1. [Scaling with high IOPS] Using async I/O. 
+
+* [Fast Scans on Key-Value Stores](https://vldb.org/pvldb/vol10/p1526-bocksrocker.pdf): This paper enumerates the dominant factors impacting the performance of Key-Value Store (KVS) with point queries versus range queries. It depicts the SQL-over-NoSQL architecture and shows the possible compromises to support mixed OLAP/OLTP workloads on top of a KVS. The alternative approaches are based on three performance characteristics in terms of storage efficiency (fragmentation), concurrency (addition conflicts), cost to implement versioning and GC, and efficiency for scan and get/put operations. There are a total of 24 ways to build KVS using this taxonomy:
+  - (update-in-place vs. log-structured vs. delta-main)
+  - (row-major vs. column-major / PAX)
+  - (clustered-versions vs. chained-versions)
+  - (periodic vs. piggy-backed garbage collection)
+
+The authors implemented two variants: 
+  1. TellStore-Log: based on logstructured with chained-versions in a row-major format and 
+  1. TellStore-Col: using a delta-main structure with clustered-versions in a column-major format.
+
 * Reference: [VLDB Papers in 2022](https://vldb.org/2022/?paper-session)
+
 
 ## <a name='tech-talks'> Tech talks
 * [Power of the Log:LSM & Append Only Data Structures](https://www.infoq.com/presentations/lsm-append-data-structures/) (2017)
