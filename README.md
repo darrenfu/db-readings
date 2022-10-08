@@ -5,9 +5,9 @@ A list of papers essential to understanding latest database development and buil
 ## <a name='TOC'>Table of Contents</a>
 
   1. [Emerging database technologies](#newdb)
-  1. [Query optimization](#query_optm)
-  1. [Query execution engine](#query_execution)
-  1. [Storage engine](#storage)
+  1. [Query management](#query-mgnt)
+  1. [Query execution](#query-exec)
+  1. [Storage](#storage)
   1. [Miscellaneous papers](#misc)
   1. [Tech talks](#techtalks)
   1. [References](#ref)
@@ -16,8 +16,19 @@ A list of papers essential to understanding latest database development and buil
 ## <a name='newdb'> Emerging database technologies
 1. [The Snowflake Elastic Data Warehouse](https://dl.acm.org/doi/pdf/10.1145/2882903.2903741): This paper highlights the key characteristics and features of Snowflake DW. Its main design ideas are:  
     * SaaS model 
-    * Multi-cluster, shared-data architecture. The biggest differentiator: VW elasticity.
+    * Multi-cluster, shared-data architecture
     * Separation of storage (S3) and compute
+
+    Its architecture is very modern in 2016 to embrace the cloud:  
+    * VW elasticity.
+    * Local caching (in each worker node) and file stealing. It follows LRU replacement policy to replace cache contents over time lazily via consistent hashing algorithm. File stealing is an interesting technique to deal with slow/straggler node to catch up with its worker process to pull files from peer nodes.
+    * Execution engine: columnar, vectorized, push-based. *This is very similar to Facebook Velox's implementation.*
+    * Query management: TBD
+    * Concurrency control: MVCC, time travel, copy from old snapshots.
+    * Pruning: TBD
+    
+    I want to highlight some interesting features to make Snowflake unique:
+    * TBD
  
 1. [Assembling a Query Engine From Spare Parts](https://www.firebolt.io/content/firebolt-vldb-cdms-2022): This paper introduces how **Firebolt** database is assembled using different opensource components as stepping stones within 18 months. Specifically:  
       * They chose *Hyrise* as the foundation of its SQL parser and planner (we would recommend *DuckDB* or *Calcite* now). The pros and cons comparison is a highlight in this paper to learn how to select a suitable opensource project as stepping stone.
@@ -28,13 +39,13 @@ A list of papers essential to understanding latest database development and buil
     As a lesson learnt, they chose assembling on top of a solid foundation, building in a single language for high velocity, investing heavily to connect different systems, e.g. unifying the type systems across planner and runtime. 
 * [Velox: Meta’s Unified Execution Engine](https://research.facebook.com/file/477542930588455/Velox-Metas-Unified-Execution-Engine-p1030-pedreira-cr2-1.pdf): TBD
 
-## <a name='query_optm'> Query optimization
+## <a name='query-mgnt'> Query management
 TBD
   
-## <a name='query_execution'> Query execution engine
+## <a name='query-exec'> Query execution
 TBD
 
-## <a name='storage'> Storage engine
+## <a name='storage'> Storage
 1. [Magma: A High Data Density Storage Engine Used in Couchbase](https://www.vldb.org/pvldb/vol15/p3496-lakshman.pdf): This paper primarily introduces a bunch of optimization techniques to the LSM tree based storage engine in Couchbase. The next generation storage engine, *Magma*, will replace the current one, *Couchstore*, which is based on Copy-On-Write B+Tree. Its design goals is to minimize write amplification, to scale concurrent compactions, to optimize for SSDs, and to lower the memory footprint.  
   
     The gist of the optimizations is to separate the index data structure (*LSM Tree Index*) from the document data storage (*Log Structured Object Store*, which uses *segmented log* concept and allows range query by seqno). To separate key and value, Magma takes a different approach than *Wisckey*. It leverages sequential I/O access patterns by avoiding the index lookup during garbage collection. Other optimization highlights:  
