@@ -14,12 +14,12 @@ A list of papers essential to understanding latest database development and buil
 
 
 ## <a name='newdb'> Emerging database technologies
-* [The Snowflake Elastic Data Warehouse](https://dl.acm.org/doi/pdf/10.1145/2882903.2903741): This paper highlights the key characteristics and features of Snowflake DW. Its main design ideas are:  
+1. [The Snowflake Elastic Data Warehouse](https://dl.acm.org/doi/pdf/10.1145/2882903.2903741): This paper highlights the key characteristics and features of Snowflake DW. Its main design ideas are:  
     * SaaS model 
     * Multi-cluster, shared-data architecture. The biggest differentiator: VW elasticity
     * Separation of storage (S3) and compute
  
-* [Assembling a Query Engine From Spare Parts](https://www.firebolt.io/content/firebolt-vldb-cdms-2022): This paper introduces how **Firebolt** database is assembled using different opensource components as stepping stones within 18 months. Specifically:
+1. [Assembling a Query Engine From Spare Parts](https://www.firebolt.io/content/firebolt-vldb-cdms-2022): This paper introduces how **Firebolt** database is assembled using different opensource components as stepping stones within 18 months. Specifically:
   1. they chose *Hyrise* as the foundation of its SQL parser and planner (we would recommend *DuckDB* or *Calcite* now). The pros and cons comparison is a highlight in this paper to learn how to select a suitable opensource project as stepping stone.
   1. it chose a *vectorization* runtime: *ClickHouse*. They also implemented a new Firebolt distributed processing stack to replace the ClickHouse's stack.
   1. The storage engine uses a columnar data layout.
@@ -35,7 +35,7 @@ TBD
 TBD
 
 ## <a name='storage'> Storage engine
-* [Magma: A High Data Density Storage Engine Used in Couchbase](https://www.vldb.org/pvldb/vol15/p3496-lakshman.pdf): This paper primarily introduces a bunch of optimization techniques to the LSM tree based storage engine in Couchbase. The next generation storage engine, *Magma*, will replace the current one, *Couchstore*, which is based on Copy-On-Write B+Tree. Its design goals is to minimize write amplification, to scale concurrent compactions, to optimize for SSDs, and to lower the memory footprint.  
+1. [Magma: A High Data Density Storage Engine Used in Couchbase](https://www.vldb.org/pvldb/vol15/p3496-lakshman.pdf): This paper primarily introduces a bunch of optimization techniques to the LSM tree based storage engine in Couchbase. The next generation storage engine, *Magma*, will replace the current one, *Couchstore*, which is based on Copy-On-Write B+Tree. Its design goals is to minimize write amplification, to scale concurrent compactions, to optimize for SSDs, and to lower the memory footprint.  
   
     The gist of the optimizations is to separate the index data structure (*LSM Tree Index*) from the document data storage (*Log Structured Object Store*, which uses *segmented log* concept and allows range query by seqno). To separate key and value, Magma takes a different approach than *Wisckey*. It leverages sequential I/O access patterns by avoiding the index lookup during garbage collection. Other optimization highlights: 
   1. [Index Block Cache] A read cache for caching the recently read (LRU) index blocks and locating the documents on log-structured storage. This object-level managed cache is more efficient than the block-level cache for document objects. 
@@ -44,7 +44,7 @@ TBD
   1. [Crash recovery] Maintaining a metadata file to store a point-in-time snapshot checkpoint
   1. [Scaling with high IOPS] Using async I/O. 
 
-* [Fast Scans on Key-Value Stores](https://vldb.org/pvldb/vol10/p1526-bocksrocker.pdf): This paper enumerates the dominant factors impacting the performance of Key-Value Store (KVS) with point queries versus range queries. It depicts the SQL-over-NoSQL architecture and shows the possible compromises to support mixed OLAP/OLTP workloads on top of a KVS. The alternative approaches are based on three performance characteristics in terms of storage efficiency (fragmentation), concurrency (addition conflicts), cost to implement versioning and GC, and efficiency for scan and get/put operations. There are a total of 24 ways to build KVS using this taxonomy:
+1. [Fast Scans on Key-Value Stores](https://vldb.org/pvldb/vol10/p1526-bocksrocker.pdf): This paper enumerates the dominant factors impacting the performance of Key-Value Store (KVS) with point queries versus range queries. It depicts the SQL-over-NoSQL architecture and shows the possible compromises to support mixed OLAP/OLTP workloads on top of a KVS. The alternative approaches are based on three performance characteristics in terms of storage efficiency (fragmentation), concurrency (addition conflicts), cost to implement versioning and GC, and efficiency for scan and get/put operations. There are a total of 24 ways to build KVS using this taxonomy:
   * (update-in-place vs. log-structured vs. delta-main)  
   * (row-major vs. column-major / PAX)  
   * (clustered-versions vs. chained-versions)
@@ -58,7 +58,7 @@ TBD
 TBD
 
 ## <a name='techtalks'> Tech talks
-* [Power of the Log:LSM & Append Only Data Structures](https://www.infoq.com/presentations/lsm-append-data-structures/) (2017)
+1. [Power of the Log:LSM & Append Only Data Structures](https://www.infoq.com/presentations/lsm-append-data-structures/) (2017)
 
 ## <a name='ref'> References
 1. [VLDB Papers in 2022](https://vldb.org/2022/?paper-session)
