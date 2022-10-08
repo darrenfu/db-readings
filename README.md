@@ -14,21 +14,11 @@ A list of papers essential to understanding latest database development and buil
 
 
 ## <a name='newdb'> Emerging database technologies
-1. [The Snowflake Elastic Data Warehouse](https://dl.acm.org/doi/pdf/10.1145/2882903.2903741): This paper highlights the key characteristics and features of Snowflake DW. Its main design ideas are:  
-    * SaaS model 
-    * Multi-cluster, shared-data architecture
-    * Separation of storage (S3) and compute
-
-    Its architecture is very modern in 2016 to embrace the cloud:  
-    * VW elasticity.
-    * Local caching (in each worker node) and file stealing. It follows LRU replacement policy to replace cache contents over time lazily via consistent hashing algorithm. File stealing is an interesting technique to deal with slow/straggler node to catch up with its worker process to pull files from peer nodes.
-    * Execution engine: columnar, vectorized, push-based. *This is very similar to Facebook Velox's implementation.*
-    * Query management: TBD
-    * Concurrency control: MVCC, time travel, copy from old snapshots.
-    * Pruning: TBD
+1. [The Snowflake Elastic Data Warehouse](https://dl.acm.org/doi/pdf/10.1145/2882903.2903741): This paper highlights the key characteristics and features of Snowflake DW. Its selling point is: SaaS model and its multi-cluster, shared-data architecture. It also follows Separation of storage and compute, which is very modern in 2016 to embrace the cloud storage, such as S3. It provides DW solution to migrate from traditional database and Hadoop to public cloud infrastructure.
+  
+    It also highlights its unique architecture and features, such as VW elasticity, local caching, file stealing, time travel & efficient cloning (on top of MVCC), min-max based pruning, semi-structured data (e.g. VARIANT), hierarchical key security models (keywords: key rotation & rekey). Its execution engine is columnar, vectorized, push-based. *This is very similar to Facebook Velox's implementation.*  
     
-    I want to highlight some interesting features to make Snowflake unique:
-    * TBD
+    It also compares the differentiators versus its competitors: Redshift, BigQuery, Azure SQL DW (presently Azure Synapse Analytics). Its dominant advantages are like compute resource horizontal scaling, ANSI SQL and semi-structured and nested data support. On the other hand, it brings up some technical chanllenges, such as multi-tenancy (think of Google's big metadata paper), full self-service model.
  
 1. [Assembling a Query Engine From Spare Parts](https://www.firebolt.io/content/firebolt-vldb-cdms-2022): This paper introduces how **Firebolt** database is assembled using different opensource components as stepping stones within 18 months. Specifically:  
       * They chose *Hyrise* as the foundation of its SQL parser and planner (we would recommend *DuckDB* or *Calcite* now). The pros and cons comparison is a highlight in this paper to learn how to select a suitable opensource project as stepping stone.
