@@ -4,13 +4,22 @@ A list of papers essential to understanding latest database development and buil
 
 ## <a name='TOC'>Table of Contents</a>
 
-  1. [VLDB Papers](#vldb)
-  2. [Tech Talks](#techtalks)
-  3. [Miscellaneous Papers](#misc)
+  1. [Emerging database technologies](#newdb)
+  1. [Query optimization](#query_optm)
+  1. [Query execution engine](#query_execution)
+  1. [Storage engine](#storage)
+  1. [Miscellaneous papers](#misc)
+  1. [Tech talks](#techtalks)
+  1. [References](#ref)
 
 
-## <a name='vldb-papers'> VLDB Papers
-* [Assembling a Query Engine From Spare Parts](https://www.firebolt.io/content/firebolt-vldb-cdms-2022): This paper introduces how Firebolt database is assembled using different opensource components as stepping stones within 18 months. Specifically:
+## <a name='newdb'> Emerging database technologies
+* [The Snowflake Elastic Data Warehouse](https://dl.acm.org/doi/pdf/10.1145/2882903.2903741): This paper highlights the key characteristics and features of Snowflake DW. Its main design ideas are:  
+    * SaaS model 
+    * Multi-cluster, shared-data architecture. The biggest differentiator: VW elasticity
+    * Separation of storage (S3) and compute
+ 
+* [Assembling a Query Engine From Spare Parts](https://www.firebolt.io/content/firebolt-vldb-cdms-2022): This paper introduces how **Firebolt** database is assembled using different opensource components as stepping stones within 18 months. Specifically:
   1. they chose *Hyrise* as the foundation of its SQL parser and planner (we would recommend *DuckDB* or *Calcite* now). The pros and cons comparison is a highlight in this paper to learn how to select a suitable opensource project as stepping stone.
   1. it chose a *vectorization* runtime: *ClickHouse*. They also implemented a new Firebolt distributed processing stack to replace the ClickHouse's stack.
   1. The storage engine uses a columnar data layout.
@@ -18,6 +27,14 @@ A list of papers essential to understanding latest database development and buil
   
     As a lesson learnt, they chose assembling on top of a solid foundation, building in a single language for high velocity, investing heavily to connect different systems, e.g. unifying the type systems across planner and runtime. 
 * [Velox: Meta’s Unified Execution Engine](https://research.facebook.com/file/477542930588455/Velox-Metas-Unified-Execution-Engine-p1030-pedreira-cr2-1.pdf): TBD
+
+## <a name='query_optm'> Query optimization
+TBD
+  
+## <a name='query_execution'> Query execution engine
+TBD
+
+## <a name='storage'> Storage engine
 * [Magma: A High Data Density Storage Engine Used in Couchbase](https://www.vldb.org/pvldb/vol15/p3496-lakshman.pdf): This paper primarily introduces a bunch of optimization techniques to the LSM tree based storage engine in Couchbase. The next generation storage engine, *Magma*, will replace the current one, *Couchstore*, which is based on Copy-On-Write B+Tree. Its design goals is to minimize write amplification, to scale concurrent compactions, to optimize for SSDs, and to lower the memory footprint.  
   
     The gist of the optimizations is to separate the index data structure (*LSM Tree Index*) from the document data storage (*Log Structured Object Store*, which uses *segmented log* concept and allows range query by seqno). To separate key and value, Magma takes a different approach than *Wisckey*. It leverages sequential I/O access patterns by avoiding the index lookup during garbage collection. Other optimization highlights: 
@@ -36,12 +53,13 @@ A list of papers essential to understanding latest database development and buil
     The authors implemented two of the variants as below. TellStore makes careful compromises with regard to latency vs. throughput tradeoffs (e.g. batching) and time vs. space tradeoffs (lock-free hash table) to help remedy the effects of concurrent updates on scans.
   1. TellStore-Log: based on logstructured with chained-versions in a row-major format and 
   1. TellStore-Col: using a delta-main structure with clustered-versions in a column-major format.
+  
+## <a name='misc'> Miscellaneous papers  
+TBD
 
-* Reference: [VLDB Papers in 2022](https://vldb.org/2022/?paper-session)
-
-
-## <a name='tech-talks'> Tech talks
+## <a name='techtalks'> Tech talks
 * [Power of the Log:LSM & Append Only Data Structures](https://www.infoq.com/presentations/lsm-append-data-structures/) (2017)
 
-## <a name='misc'> Miscellaneous Papers
-* [Dr. Jana Giceva Makreshanska's publications](https://db.in.tum.de/~giceva/index.shtml?lang=en)
+## <a name='ref'> References
+1. [VLDB Papers in 2022](https://vldb.org/2022/?paper-session)
+1. [Dr. Jana Giceva Makreshanska's publications](https://db.in.tum.de/~giceva/index.shtml?lang=en)
